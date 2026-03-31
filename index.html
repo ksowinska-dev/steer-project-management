@@ -140,32 +140,33 @@ const App = () => {
             { id: "D.3.2.1", title: "MoU of the STEER-NWE Community of Practice", due: "Period 3", lead: "IPR & POLIS" },
             { id: "D.3.3.1", title: "Set up of the project observatory and knowledge sharing platform", due: "Period 3", lead: "POLIS" },
           ].map((item, idx) => (
-            <div key={idx} className="grid grid-cols-1 sm:grid-cols-12 gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100 items-start">
-              <div className="sm:col-span-8">
-                <p className="text-slate-700 font-medium italic text-sm leading-snug">
-                  <span className="font-bold not-italic mr-1">{item.id}</span>
+            <div key={idx} className="flex flex-col sm:flex-row sm:items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 min-h-[80px]">
+              <div className="flex-grow">
+                <p className="text-slate-700 font-medium italic text-sm leading-normal break-words">
+                  <span className="font-bold not-italic mr-2 text-slate-900">{item.id}</span>
                   {item.title}
                 </p>
               </div>
-              <div className="sm:col-span-4 flex flex-wrap gap-2 sm:justify-end">
-                <span className="text-blue-600 font-bold text-[10px] bg-white px-2 py-1 rounded shadow-sm border border-blue-50 whitespace-nowrap">
+              <div className="flex sm:flex-col items-center sm:items-end gap-2 shrink-0 sm:w-32">
+                <span className="text-blue-600 font-bold text-[10px] bg-white px-2 py-1 rounded shadow-sm border border-blue-50 whitespace-nowrap w-fit">
                   Due: {item.due}
                 </span>
-                <span className="text-blue-600 font-bold text-[10px] bg-white px-2 py-1 rounded shadow-sm border border-blue-50 whitespace-nowrap">
+                <span className="text-blue-600 font-bold text-[10px] bg-white px-2 py-1 rounded shadow-sm border border-blue-50 whitespace-nowrap w-fit">
                   Lead: {item.lead}
                 </span>
               </div>
             </div>
           ))}
           
-          <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100 items-center">
-            <div className="sm:col-span-8">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 min-h-[60px]">
+            <div className="flex-grow">
               <p className="text-slate-700 font-medium italic text-sm">
-                <span className="font-bold not-italic mr-1">Pilots</span>
+                <span className="font-bold not-italic mr-2 text-slate-900">Pilots</span>
+                Operational phase kickoff
               </p>
             </div>
-            <div className="sm:col-span-4 flex sm:justify-end">
-              <span className="text-slate-400 font-bold text-[10px] uppercase tracking-wider">
+            <div className="shrink-0 sm:w-32 sm:text-right">
+              <span className="text-slate-400 font-bold text-[10px] uppercase tracking-wider whitespace-nowrap">
                 Starts Period 4
               </span>
             </div>
@@ -188,7 +189,7 @@ const App = () => {
             </div>
             <div>
               <p className="font-bold">Knowledge Partner Meeting</p>
-              <p className="text-xs text-slate-400 mt-1">Hosted by <strong>POLIS</strong> in Brussels. Focusing on pilots and WP3 strategy and training curriculum.</p>
+              <p className="text-xs text-slate-400 mt-1 leading-relaxed">Hosted by <strong>POLIS</strong> in Brussels. Focusing on pilots and WP3 strategy and training curriculum.</p>
             </div>
           </div>
           <div className="flex gap-4 items-start">
@@ -198,7 +199,7 @@ const App = () => {
             </div>
             <div>
               <p className="font-bold">Partner Meeting</p>
-              <p className="text-xs text-slate-400 mt-1">Hosted by <strong>MGP</strong> and <strong>IPR</strong> in Paris. Field visits to potential suburban pilot sites.</p>
+              <p className="text-xs text-slate-400 mt-1 leading-relaxed">Hosted by <strong>MGP</strong> and <strong>IPR</strong> in Paris. Field visits to potential suburban pilot sites.</p>
             </div>
           </div>
         </div>
@@ -219,10 +220,10 @@ const App = () => {
         
         {/* Left Section: Navigation & Content */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="flex bg-white rounded-xl shadow-sm p-1 border border-slate-200 overflow-x-auto whitespace-nowrap">
+          <div className="flex bg-white rounded-xl shadow-sm p-1 border border-slate-200 overflow-x-auto whitespace-nowrap scrollbar-hide">
             <button
               onClick={() => setActiveTab('Overview')}
-              className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 ${
+              className={`flex-1 py-3 px-6 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 min-w-[180px] ${
                 activeTab === 'Overview' 
                 ? 'bg-slate-800 text-white shadow-md' 
                 : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'
@@ -234,7 +235,7 @@ const App = () => {
               <button
                 key={wp}
                 onClick={() => setActiveTab(wp)}
-                className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all ${
+                className={`flex-1 py-3 px-6 rounded-lg text-sm font-semibold transition-all min-w-[120px] ${
                   activeTab === wp 
                   ? 'bg-blue-600 text-white shadow-md' 
                   : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'
@@ -361,6 +362,8 @@ const App = () => {
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
       `}} />
     </div>
   );
