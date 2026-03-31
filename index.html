@@ -1,372 +1,282 @@
-import React, { useState } from 'react';
-import { 
-  Users, 
-  Settings, 
-  MapPin, 
-  BookOpen, 
-  TrendingUp, 
-  ChevronRight,
-  Zap,
-  Clock,
-  LayoutDashboard,
-  Calendar,
-  ArrowRightCircle,
-  FileText
-} from 'lucide-react';
-
-const App = () => {
-  const [activeTab, setActiveTab] = useState('Overview');
-
-  // Total periods in the project is 7 (42 months / 6 months per period)
-  const totalPeriods = 7;
-
-  const projectData = {
-    WP1: {
-      title: "Work Package 1: Engage & Co-Develop",
-      objective: "Define strategy and co-create guidelines for e-carsharing integration.",
-      partners: ["IPR", "LIST", "Autodelen", "LHS"],
-      activities: [
-        { name: "Joint Methodology Definition", lead: "LIST", desc: "Establishing the transnational framework.", start: 1, end: 7 },
-        { name: "Stakeholder Mapping & Co-creation", lead: "IPR", desc: "Identifying groups and co-designing services.", start: 1, end: 2 },
-        { name: "Digital Tools Assessment", lead: "LIST", desc: "GIS-based methods and data sharing agreements.", start: 1, end: 2 },
-        { name: "Policy Guidelines Development", lead: "LHS", desc: "Aligning with SUMPs and climate targets.", start: 1, end: 2 },
-        { name: "Communication Strategy", lead: "POLIS", desc: "Multi-channel outreach design.", start: 1, end: 7 }
-      ],
-      output: "STEER-NWE Joint Strategy (O1.1)"
-    },
-    WP2: {
-      title: "Work Package 2: Pilot & Assess",
-      objective: "Demonstrate integrated solutions through 6 real-life pilots.",
-      partners: ["Autodelen", "LHS", "AMS", "FCC", "DIFF", "B-E", "MGP"],
-      activities: [
-        { name: "Pre-piloting: KPIs & Plans", lead: "Autodelen", desc: "Defining local action plans.", start: 2, end: 4 },
-        { name: "Public Space & Housing Pilots", lead: "LHS/AMS", desc: "Pilots in Stuttgart and Amsterdam.", start: 4, end: 6 },
-        { name: "Charging & Energy Hubs Pilots", lead: "FCC/DIFF", desc: "Pilots in Fingal and Differdange.", start: 4, end: 6 },
-        { name: "Governance & Business Pilots", lead: "B-E/MGP", desc: "Pilots in Brussels and Greater Paris.", start: 4, end: 6 },
-        { name: "Impact Assessment", lead: "LIST", desc: "LCA and GIS evaluation.", start: 3, end: 7 },
-        { name: "Upscaling & Replication Plans", lead: "Autodelen", desc: "Defining future growth steps.", start: 5, end: 7 }
-      ],
-      output: "STEER-NWE Toolkit (O2.4) + 6 Pilots"
-    },
-    WP3: {
-      title: "Work Package 3: Train & Replicate",
-      objective: "Capacity building and long-term replication across North-West Europe.",
-      partners: ["POLIS", "ESB", "Autodelen"],
-      activities: [
-        { name: "STEER-NWE Academy", lead: "POLIS", desc: "Training sessions for 120+ practitioners.", start: 3, end: 7 },
-        { name: "International Community of Practice", lead: "IPR/POLIS", desc: "Quality board and expert liaison.", start: 3, end: 7 },
-        { name: "Knowledge Sharing Observatory", lead: "POLIS", desc: "Transnational exchange platform.", start: 3, end: 7 },
-        { name: "Economic Viability Strategy", lead: "ESB", desc: "Funding pathways and sustainability.", start: 5, end: 7 },
-        { name: "Roadmap for NWE-wide Adoption", lead: "Autodelen", desc: "Legacy guide for external authorities.", start: 5, end: 7 }
-      ],
-      output: "STEER-NWE Roadmap (O3.2)"
-    }
-  };
-
-  const partners = [
-    { id: "LIST", name: "Luxembourg Institute of Science and Technology", role: "Lead Partner / Tech" },
-    { id: "B-E", name: "Brussels Environment", role: "Governance / Pilot" },
-    { id: "LHS", name: "City of Stuttgart", role: "Housing Integration / Pilot" },
-    { id: "AMS", name: "City of Amsterdam", role: "Public Space / Pilot" },
-    { id: "FCC", name: "Fingal County Council", role: "Charging Hubs / Pilot" },
-    { id: "ESB", name: "Electricity Supply Board", role: "Infrastructure Provider" },
-    { id: "IPR", name: "Paris Regional Planning Institute", role: "Urban Policy" },
-    { id: "POLIS", name: "POLIS Network", role: "Dissemination / Academy" },
-    { id: "MGP", name: "Greater Paris Metropolis", role: "LEZ Governance / Pilot" },
-    { id: "Autodelen", name: "Autodelen.net", role: "Shared Mobility Expert" },
-    { id: "DIFF", name: "City of Differdange", role: "Solar Mobility / Pilot" },
-  ];
-
-  // Component to render the duration stripe
-  const TimelineStripe = ({ start, end }) => {
-    const width = ((end - start + 1) / totalPeriods) * 100;
-    const left = ((start - 1) / totalPeriods) * 100;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEER-NWE Project Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     
-    return (
-      <div className="mt-3">
-        <div className="flex justify-between text-[8px] text-slate-400 mb-1 px-1 font-bold">
-          <span>P1</span>
-          <span>P2</span>
-          <span>P3</span>
-          <span>P4</span>
-          <span>P5</span>
-          <span>P6</span>
-          <span>P7</span>
-        </div>
-        <div className="h-2 w-full bg-slate-100 rounded-full relative overflow-hidden">
-          <div 
-            className="absolute h-full bg-blue-500 rounded-full transition-all duration-500"
-            style={{ width: `${width}%`, left: `${left}%` }}
-          />
-        </div>
-      </div>
-    );
-  };
-
-  const renderOverview = () => (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6">
-          <h3 className="text-blue-800 font-bold flex items-center gap-2 mb-3">
-            <Clock className="w-5 h-5" /> Where are we now?
-          </h3>
-          <p className="text-blue-900/70 text-sm leading-relaxed">
-            Project is currently in the <strong>Pilot & Assess</strong> phase. WTG leads activities related to pilots, supporting cities in planning and KPIs definition. During this phase POLIS will kick start the <strong>STEER Academy</strong> - a training program for policymakers. LIST will prepare an impact assessment framework and IPR and POLIS will conceptualize the Community of Practice, involving 50 experts.
-          </p>
-        </div>
-        <div className="bg-green-50 border border-green-100 rounded-2xl p-6">
-          <h3 className="text-green-800 font-bold flex items-center gap-2 mb-3">
-            <ArrowRightCircle className="w-5 h-5" /> What should happen this period?
-          </h3>
-          <ul className="text-green-900/70 text-sm space-y-2 list-disc pl-4">
-            <li>Finalization of <strong>pilots concepts</strong></li>
-            <li>Finalization of <strong>KPIs, data sources and measuring methods</strong> across all 6 pilot locations.</li>
-            <li>Launch of the <strong>STEER Academy and Community of Practice</strong>.</li>
-            <li>Setup of the <strong>Project Observatory</strong> web tool.</li>
-            <li>Initial configuration of GIS-based digital twin modules.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
-        <h3 className="text-slate-800 font-bold flex items-center gap-2 mb-4">
-          <FileText className="w-5 h-5 text-blue-600" /> Upcoming Activities & Deliverables
-        </h3>
-        <div className="space-y-3">
-          {/* Formatted Deliverable Item */}
-          {[
-            { id: "D.2.6.1", title: "Impact Evaluation Framework", due: "Period 3", lead: "LIST" },
-            { id: "D.3.1.1", title: "Curriculum of training & educational modules towards the STEER-NWE Academy", due: "Period 3", lead: "POLIS" },
-            { id: "D.3.2.1", title: "MoU of the STEER-NWE Community of Practice", due: "Period 3", lead: "IPR & POLIS" },
-            { id: "D.3.3.1", title: "Set up of the project observatory and knowledge sharing platform", due: "Period 3", lead: "POLIS" },
-          ].map((item, idx) => (
-            <div key={idx} className="flex flex-col sm:flex-row sm:items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 min-h-[80px]">
-              <div className="flex-grow">
-                <p className="text-slate-700 font-medium italic text-sm leading-normal break-words">
-                  <span className="font-bold not-italic mr-2 text-slate-900">{item.id}</span>
-                  {item.title}
-                </p>
-              </div>
-              <div className="flex sm:flex-col items-center sm:items-end gap-2 shrink-0 sm:w-32">
-                <span className="text-blue-600 font-bold text-[10px] bg-white px-2 py-1 rounded shadow-sm border border-blue-50 whitespace-nowrap w-fit">
-                  Due: {item.due}
-                </span>
-                <span className="text-blue-600 font-bold text-[10px] bg-white px-2 py-1 rounded shadow-sm border border-blue-50 whitespace-nowrap w-fit">
-                  Lead: {item.lead}
-                </span>
-              </div>
-            </div>
-          ))}
-          
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 min-h-[60px]">
-            <div className="flex-grow">
-              <p className="text-slate-700 font-medium italic text-sm">
-                <span className="font-bold not-italic mr-2 text-slate-900">Pilots</span>
-                Operational phase kickoff
-              </p>
-            </div>
-            <div className="shrink-0 sm:w-32 sm:text-right">
-              <span className="text-slate-400 font-bold text-[10px] uppercase tracking-wider whitespace-nowrap">
-                Starts Period 4
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-slate-900 text-white rounded-2xl p-6 shadow-xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 p-4 opacity-10">
-          <Calendar className="w-24 h-24" />
-        </div>
-        <h3 className="text-yellow-400 font-bold flex items-center gap-2 mb-4 uppercase tracking-widest text-sm">
-          Upcoming Events
-        </h3>
-        <div className="space-y-4">
-          <div className="flex gap-4 items-start">
-            <div className="bg-white/10 p-2 rounded text-center min-w-[70px]">
-              <span className="block text-xs uppercase font-bold">April</span>
-              <span className="block text-xl font-bold">15-16</span>
-            </div>
-            <div>
-              <p className="font-bold">Knowledge Partner Meeting</p>
-              <p className="text-xs text-slate-400 mt-1 leading-relaxed">Hosted by <strong>POLIS</strong> in Brussels. Focusing on pilots and WP3 strategy and training curriculum.</p>
-            </div>
-          </div>
-          <div className="flex gap-4 items-start">
-            <div className="bg-white/10 p-2 rounded text-center min-w-[70px]">
-              <span className="block text-xs uppercase font-bold">May</span>
-              <span className="block text-xl font-bold">19-22</span>
-            </div>
-            <div>
-              <p className="font-bold">Partner Meeting</p>
-              <p className="text-xs text-slate-400 mt-1 leading-relaxed">Hosted by <strong>MGP</strong> and <strong>IPR</strong> in Paris. Field visits to potential suburban pilot sites.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  return (
-    <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans">
-      <header className="max-w-6xl mx-auto mb-10 text-center">
-        <h1 className="text-3xl font-bold text-slate-800 mb-2">STEER-NWE Project Timeline</h1>
-        <p className="text-slate-600 max-w-2xl mx-auto italic">
-          Visualization of 42 months (7 periods) of activity planning.
-        </p>
-      </header>
-
-      <main className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        {/* Left Section: Navigation & Content */}
-        <div className="lg:col-span-2 space-y-6">
-          <div className="flex bg-white rounded-xl shadow-sm p-1 border border-slate-200 overflow-x-auto whitespace-nowrap scrollbar-hide">
-            <button
-              onClick={() => setActiveTab('Overview')}
-              className={`flex-1 py-3 px-6 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 min-w-[180px] ${
-                activeTab === 'Overview' 
-                ? 'bg-slate-800 text-white shadow-md' 
-                : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'
-              }`}
-            >
-              <LayoutDashboard className="w-4 h-4" /> General Overview
-            </button>
-            {Object.keys(projectData).map((wp) => (
-              <button
-                key={wp}
-                onClick={() => setActiveTab(wp)}
-                className={`flex-1 py-3 px-6 rounded-lg text-sm font-semibold transition-all min-w-[120px] ${
-                  activeTab === wp 
-                  ? 'bg-blue-600 text-white shadow-md' 
-                  : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'
-                }`}
-              >
-                {wp}
-              </button>
-            ))}
-          </div>
-
-          <div className="bg-white rounded-2xl shadow-md border border-slate-100 p-6 min-h-[450px]">
-            {activeTab === 'Overview' ? renderOverview() : (
-              <>
-                <div className="flex items-start justify-between mb-6">
-                  <div>
-                    <h2 className="text-xl font-bold text-slate-800">{projectData[activeTab].title}</h2>
-                    <p className="text-slate-500 text-sm mt-1">{projectData[activeTab].objective}</p>
-                  </div>
-                  <div className="bg-blue-50 p-3 rounded-full shrink-0">
-                    {activeTab === 'WP1' && <Settings className="text-blue-600 w-6 h-6" />}
-                    {activeTab === 'WP2' && <MapPin className="text-blue-600 w-6 h-6" />}
-                    {activeTab === 'WP3' && <BookOpen className="text-blue-600 w-6 h-6" />}
-                  </div>
-                </div>
-
-                <div className="space-y-5 mb-8">
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-                    <Clock className="w-3 h-3" />
-                    Activities & Schedule
-                  </h3>
-                  <div className="grid gap-4">
-                    {projectData[activeTab].activities.map((act, i) => (
-                      <div key={i} className="p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-md hover:border-blue-200 transition-all group">
-                        <div className="flex items-start gap-4">
-                          <div className="bg-white w-8 h-8 rounded flex items-center justify-center shadow-sm text-blue-600 font-bold border border-slate-100 text-sm shrink-0">
-                            {i + 1}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex justify-between items-start">
-                              <h4 className="font-semibold text-slate-700 truncate pr-2">{act.name}</h4>
-                              <span className="text-[9px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-bold uppercase whitespace-nowrap">Lead: {act.lead}</span>
-                            </div>
-                            <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{act.desc}</p>
-                            
-                            {/* The Timeline Stripe */}
-                            <TimelineStripe start={act.start} end={act.end} />
-                            
-                          </div>
-                          <ChevronRight className="text-slate-300 w-4 h-4 mt-1 group-hover:translate-x-1 transition-transform" />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="bg-blue-600 rounded-xl p-4 text-white flex items-center justify-between">
-                  <div>
-                    <span className="text-[10px] uppercase font-bold opacity-80">Final WP Output</span>
-                    <p className="font-bold text-lg">{projectData[activeTab].output}</p>
-                  </div>
-                  <TrendingUp className="opacity-40 w-8 h-8" />
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-
-        {/* Right Section: Partners & Stats */}
-        <div className="space-y-6">
-          <div className="bg-white rounded-2xl shadow-md border border-slate-100 p-6">
-            <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <Users className="w-5 h-5 text-blue-600" />
-              Consortium
-            </h3>
-            <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-              {partners.map((p) => (
-                <div key={p.id} className="p-3 rounded-lg border border-slate-50 bg-slate-50 hover:bg-white hover:border-slate-200 hover:shadow-sm transition-all">
-                  <span className="font-bold text-blue-600 text-[10px]">{p.id}</span>
-                  <p className="text-xs font-semibold text-slate-700 mt-0.5 leading-tight">{p.name}</p>
-                  <p className="text-[9px] text-slate-400 italic">{p.role}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="bg-slate-800 rounded-2xl shadow-md p-6 text-white">
-            <h3 className="font-bold mb-4 flex items-center gap-2">
-              <Zap className="w-5 h-5 text-yellow-400" />
-              Key Indicators
-            </h3>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 bg-white/10 p-3 rounded-xl">
-                <div className="p-2 bg-blue-500 rounded-lg"><TrendingUp className="w-4 h-4" /></div>
-                <div>
-                  <p className="text-sm font-bold">1,000+ Tonnes</p>
-                  <p className="text-[9px] uppercase opacity-60">$CO_2$ Savings Target</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 bg-white/10 p-3 rounded-xl">
-                <div className="p-2 bg-yellow-500 rounded-lg"><Users className="w-4 h-4" /></div>
-                <div>
-                  <p className="text-sm font-bold">120 Participants</p>
-                  <p className="text-[9px] uppercase opacity-60">Academy Training Goal</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 bg-white/10 p-3 rounded-xl">
-                <div className="p-2 bg-green-500 rounded-lg"><MapPin className="w-4 h-4" /></div>
-                <div>
-                  <p className="text-sm font-bold">6 NWE Cities</p>
-                  <p className="text-[9px] uppercase opacity-60">Integrated Urban Pilots</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-
-      <footer className="max-w-6xl mx-auto mt-12 py-6 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center text-slate-400 text-[10px]">
-        <p>Interreg North-West Europe 2021-2027 | NWE0400629-STEER-NWE</p>
-        <p className="mt-2 md:mt-0">1 Period = 6 Months | Total Project Duration = 42 Months</p>
-      </footer>
-
-      <style dangerouslySetInnerHTML={{ __html: `
+    <style>
+        [x-cloak] { display: none !important; }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-      `}} />
-    </div>
-  );
-};
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+    </style>
 
-export default App;
+    <script>
+        // Define data logic BEFORE Alpine loads
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('dashboardData', () => ({
+                activeTab: 'Overview',
+                init() {
+                    this.renderIcons();
+                    this.$watch('activeTab', () => this.renderIcons());
+                },
+                renderIcons() {
+                    this.$nextTick(() => {
+                        if (window.lucide) {
+                            window.lucide.createIcons();
+                        }
+                    });
+                },
+                deliverables: [
+                    { id: "D.2.6.1", title: "Impact Evaluation Framework", due: "Period 3", lead: "LIST" },
+                    { id: "D.3.1.1", title: "Academy Curriculum of training modules", due: "Period 3", lead: "POLIS" },
+                    { id: "D.3.2.1", title: "MoU of the STEER-NWE Community of Practice", due: "Period 3", lead: "IPR & POLIS" },
+                    { id: "D.3.3.1", title: "Project observatory knowledge platform setup", due: "Period 3", lead: "POLIS" },
+                ],
+                partners: [
+                    { id: "LIST", name: "Luxembourg Institute of Science and Technology", role: "Lead Partner / Tech" },
+                    { id: "B-E", name: "Brussels Environment", role: "Governance / Pilot" },
+                    { id: "LHS", name: "City of Stuttgart", role: "Housing Integration / Pilot" },
+                    { id: "AMS", name: "City of Amsterdam", role: "Public Space / Pilot" },
+                    { id: "FCC", name: "Fingal County Council", role: "Charging Hubs / Pilot" },
+                    { id: "ESB", name: "Electricity Supply Board", role: "Infrastructure Provider" },
+                    { id: "IPR", name: "Paris Regional Planning Institute", role: "Urban Policy" },
+                    { id: "POLIS", name: "POLIS Network", role: "Dissemination / Academy" },
+                    { id: "MGP", name: "Greater Paris Metropolis", role: "LEZ Governance / Pilot" },
+                    { id: "Autodelen", name: "Autodelen.net", role: "Shared Mobility Expert" },
+                    { id: "DIFF", name: "City of Differdange", role: "Solar Mobility / Pilot" },
+                ],
+                projectData: {
+                    WP1: {
+                        title: "Work Package 1: Engage & Co-Develop",
+                        objective: "Define strategy and co-create guidelines for e-carsharing integration.",
+                        output: "STEER-NWE Joint Strategy (O1.1)",
+                        activities: [
+                            { name: "Joint Methodology Definition", lead: "LIST", desc: "Establishing the transnational framework.", start: 1, end: 7 },
+                            { name: "Stakeholder Mapping & Co-creation", lead: "IPR", desc: "Identifying groups and co-designing services.", start: 1, end: 2 },
+                            { name: "Digital Tools Assessment", lead: "LIST", desc: "GIS-based methods and data sharing agreements.", start: 1, end: 2 },
+                            { name: "Policy Guidelines Development", lead: "LHS", desc: "Aligning with SUMPs and climate targets.", start: 1, end: 2 },
+                            { name: "Communication Strategy", lead: "POLIS", desc: "Multi-channel outreach design.", start: 1, end: 7 }
+                        ]
+                    },
+                    WP2: {
+                        title: "Work Package 2: Pilot & Assess",
+                        objective: "Demonstrate integrated solutions through 6 real-life pilots.",
+                        output: "STEER-NWE Toolkit (O2.4) + 6 Pilots",
+                        activities: [
+                            { name: "Pre-piloting: KPIs & Plans", lead: "Autodelen", desc: "Defining local action plans.", start: 2, end: 4 },
+                            { name: "Public Space & Housing Pilots", lead: "LHS/AMS", desc: "Pilots in Stuttgart and Amsterdam.", start: 4, end: 6 },
+                            { name: "Charging & Energy Hubs Pilots", lead: "FCC/DIFF", desc: "Pilots in Fingal and Differdange.", start: 4, end: 6 },
+                            { name: "Governance & Business Pilots", lead: "B-E/MGP", desc: "Pilots in Brussels and Greater Paris.", start: 4, end: 6 },
+                            { name: "Impact Assessment", lead: "LIST", desc: "LCA and GIS evaluation.", start: 3, end: 7 },
+                            { name: "Upscaling & Replication Plans", lead: "Autodelen", desc: "Defining future growth steps.", start: 5, end: 7 }
+                        ]
+                    },
+                    WP3: {
+                        title: "Work Package 3: Train & Replicate",
+                        objective: "Capacity building and long-term replication across North-West Europe.",
+                        output: "STEER-NWE Roadmap (O3.2)",
+                        activities: [
+                            { name: "STEER-NWE Academy", lead: "POLIS", desc: "Training sessions for 120+ practitioners.", start: 3, end: 7 },
+                            { name: "International Community of Practice", lead: "IPR/POLIS", desc: "Quality board and expert liaison.", start: 3, end: 7 },
+                            { name: "Knowledge Sharing Observatory", lead: "POLIS", desc: "Transnational exchange platform.", start: 3, end: 7 },
+                            { name: "Economic Viability Strategy", lead: "ESB", desc: "Funding pathways and sustainability.", start: 5, end: 7 },
+                            { name: "Roadmap for NWE-wide Adoption", lead: "Autodelen", desc: "Legacy guide for external authorities.", start: 5, end: 7 }
+                        ]
+                    }
+                }
+            }));
+        });
+    </script>
+    
+    <!-- Alpine.js (Loaded AFTER data definition script) -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen p-4 md:p-8" x-data="dashboardData">
+
+    <header class="max-w-6xl mx-auto mb-10 text-center">
+        <h1 class="text-3xl font-bold text-slate-800 mb-2">STEER-NWE Project Timeline</h1>
+        <p class="text-slate-600 max-w-2xl mx-auto italic">
+            Visualization of 42 months (7 periods) of activity planning.
+        </p>
+    </header>
+
+    <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Left Section: Navigation & Content -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- Navigation Tabs -->
+            <div class="flex bg-white rounded-xl shadow-sm p-1 border border-slate-200 overflow-x-auto whitespace-nowrap scrollbar-hide">
+                <button
+                    @click="activeTab = 'Overview'"
+                    :class="activeTab === 'Overview' ? 'bg-slate-800 text-white shadow-md' : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'"
+                    class="flex-1 py-3 px-6 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 min-w-[180px]"
+                >
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i> General Overview
+                </button>
+                <template x-for="(wpData, wpKey) in projectData" :key="wpKey">
+                    <button
+                        @click="activeTab = wpKey"
+                        :class="activeTab === wpKey ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'"
+                        class="flex-1 py-3 px-6 rounded-lg text-sm font-semibold transition-all min-w-[120px]"
+                        x-text="wpKey"
+                    ></button>
+                </template>
+            </div>
+
+            <!-- Dashboard Content Card -->
+            <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 min-h-[500px]">
+                
+                <!-- Overview Content -->
+                <div x-show="activeTab === 'Overview'" class="space-y-6" x-cloak>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 border border-blue-100 rounded-2xl p-6">
+                            <h3 class="text-blue-800 font-bold flex items-center gap-2 mb-3">
+                                <i data-lucide="clock" class="w-5 h-5"></i> Where are we now?
+                            </h3>
+                            <p class="text-blue-900/70 text-sm leading-relaxed">
+                                Project is currently transitioning into the <strong>Pilot & Assess</strong> phase. <strong>Autodelen.net</strong> is leading pre-piloting activities to support cities in planning and KPI definition.
+                            </p>
+                        </div>
+                        <div class="bg-green-50 border border-green-100 rounded-2xl p-6">
+                            <h3 class="text-green-800 font-bold flex items-center gap-2 mb-3">
+                                <i data-lucide="arrow-right-circle" class="w-5 h-5"></i> What should happen this period?
+                            </h3>
+                            <ul class="text-green-900/70 text-sm space-y-2 list-disc pl-4">
+                                <li>Consolidation of <strong>Pilot Local Action Plans</strong>.</li>
+                                <li>Formalization of <strong>KPIs and data sources</strong>.</li>
+                                <li>Launch of the <strong>STEER Academy</strong> modules.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
+                        <h3 class="text-slate-800 font-bold flex items-center gap-2 mb-4">
+                            <i data-lucide="file-text" class="w-5 h-5 text-blue-600"></i> Upcoming Deliverables (P3)
+                        </h3>
+                        <div class="space-y-3">
+                            <template x-for="item in deliverables" :key="item.id">
+                                <div class="flex flex-col sm:flex-row sm:items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 min-h-[80px]">
+                                    <div class="flex-grow">
+                                        <p class="text-slate-700 font-medium italic text-sm leading-tight">
+                                            <span class="font-bold not-italic mr-2 text-slate-900" x-text="item.id"></span>
+                                            <span x-text="item.title"></span>
+                                        </p>
+                                    </div>
+                                    <div class="flex sm:flex-col items-center sm:items-end gap-2 shrink-0 sm:w-32">
+                                        <span class="text-blue-600 font-bold text-[10px] bg-white px-2 py-1 rounded shadow-sm border border-blue-50 whitespace-nowrap w-fit">
+                                            Due: <span x-text="item.due"></span>
+                                        </span>
+                                        <span class="text-blue-600 font-bold text-[10px] bg-white px-2 py-1 rounded shadow-sm border border-blue-50 whitespace-nowrap w-fit">
+                                            Lead: <span x-text="item.lead"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WP Detail View -->
+                <template x-for="(wp, key) in projectData" :key="key">
+                    <div x-show="activeTab === key" class="space-y-6" x-cloak>
+                        <div class="flex items-start justify-between mb-6">
+                            <div>
+                                <h2 class="text-xl font-bold text-slate-800" x-text="wp.title"></h2>
+                                <p class="text-slate-500 text-sm mt-1" x-text="wp.objective"></p>
+                            </div>
+                            <div class="bg-blue-50 p-3 rounded-full shrink-0">
+                                <template x-if="key === 'WP1'"><i data-lucide="settings" class="text-blue-600 w-6 h-6"></i></template>
+                                <template x-if="key === 'WP2'"><i data-lucide="map-pin" class="text-blue-600 w-6 h-6"></i></template>
+                                <template x-if="key === 'WP3'"><i data-lucide="book-open" class="text-blue-600 w-6 h-6"></i></template>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                                <i data-lucide="clock" class="w-3 h-3"></i> Activities & Schedule
+                            </h3>
+                            <template x-for="(act, i) in wp.activities" :key="i">
+                                <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-md transition-all group">
+                                    <div class="flex items-start gap-4">
+                                        <div class="bg-white w-8 h-8 rounded flex items-center justify-center shadow-sm text-blue-600 font-bold border border-slate-100 text-sm shrink-0" x-text="i + 1"></div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex justify-between items-start">
+                                                <h4 class="font-semibold text-slate-700 truncate pr-2" x-text="act.name"></h4>
+                                                <span class="text-[9px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-bold uppercase whitespace-nowrap" x-text="'Lead: ' + act.lead"></span>
+                                            </div>
+                                            <p class="text-xs text-slate-500 mt-0.5" x-text="act.desc"></p>
+                                            
+                                            <!-- Responsive Timeline Bar -->
+                                            <div class="mt-3">
+                                                <div class="flex justify-between text-[8px] text-slate-400 mb-1 px-1 font-bold">
+                                                    <span>P1</span><span>P2</span><span>P3</span><span>P4</span><span>P5</span><span>P6</span><span>P7</span>
+                                                </div>
+                                                <div class="h-2 w-full bg-slate-100 rounded-full relative overflow-hidden">
+                                                    <div 
+                                                        class="absolute h-full bg-blue-500 rounded-full transition-all duration-700"
+                                                        :style="`width: ${((act.end - act.start + 1) / 7) * 100}%; left: ${((act.start - 1) / 7) * 100}%`"
+                                                    ></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="space-y-6">
+            <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6">
+                <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <i data-lucide="users" class="w-5 h-5 text-blue-600"></i> Consortium
+                </h3>
+                <div class="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                    <template x-for="p in partners" :key="p.id">
+                        <div class="p-3 rounded-lg border border-slate-50 bg-slate-50 hover:bg-white hover:border-slate-200 transition-all">
+                            <span class="font-bold text-blue-600 text-[10px]" x-text="p.id"></span>
+                            <p class="text-xs font-semibold text-slate-700 mt-0.5 leading-tight" x-text="p.name"></p>
+                            <p class="text-[9px] text-slate-400 italic" x-text="p.role"></p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-2xl shadow-md p-6 text-white">
+                <h3 class="font-bold mb-4 flex items-center gap-2">
+                    <i data-lucide="zap" class="w-5 h-5 text-yellow-400"></i> Key Targets
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3 bg-white/10 p-3 rounded-xl">
+                        <i data-lucide="trending-up" class="w-4 h-4 text-blue-400"></i>
+                        <div>
+                            <p class="text-sm font-bold">1,000+ Tonnes</p>
+                            <p class="text-[9px] uppercase opacity-60">$CO_2$ Savings Target</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="max-w-6xl mx-auto mt-12 py-6 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center text-slate-400 text-[10px]">
+        <p>Interreg North-West Europe 2021-2027 | NWE0400629-STEER-NWE</p>
+        <p class="mt-2 md:mt-0">1 Period = 6 Months | Total Project Duration = 42 Months</p>
+    </footer>
+
+</body>
+</html>
