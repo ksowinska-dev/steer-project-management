@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #6f0ec3; -webkit-text-stroke: #6f0ec3}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #0e6e6d; -webkit-text-stroke: #0e6e6d}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #18702b; -webkit-text-stroke: #18702b}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; -webkit-text-stroke: #000000; min-height: 16.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #4d5055; -webkit-text-stroke: #4d5055}
+    span.s1 {font-kerning: none; color: #6f0ec3; background-color: #ecf1f7; -webkit-text-stroke: 0px #6f0ec3}
+    span.s2 {font-kerning: none; background-color: #ecf1f7}
+    span.s3 {font-kerning: none; color: #0e6e6d; background-color: #ecf1f7; -webkit-text-stroke: 0px #0e6e6d}
+    span.s4 {font-kerning: none; color: #18702b; background-color: #ecf1f7; -webkit-text-stroke: 0px #18702b}
+    span.s5 {font-kerning: none; color: #000000; background-color: #ecf1f7; -webkit-text-stroke: 0px #000000}
+    span.s6 {font-kerning: none}
+    span.s7 {font-kerning: none; color: #a4450b; background-color: #ecf1f7; -webkit-text-stroke: 0px #a4450b}
+    span.s8 {font-kerning: none; color: #4d5055; background-color: #ecf1f7; -webkit-text-stroke: 0px #4d5055}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import</span><span class="s2"> </span><span class="s3">React</span><span class="s2">, { useState } </span><span class="s1">from</span><span class="s2"> </span><span class="s4">'react'</span><span class="s2">;</span></p>
+<p class="p2"><span class="s2">import</span><span class="s5"> {<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Users</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Settings</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">MapPin</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">BookOpen</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">TrendingUp</span><span class="s5">,<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">ChevronRight</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s3">Zap</span><span class="s2">,</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Clock</span><span class="s5">,</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">LayoutDashboard</span><span class="s5">,</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">Calendar</span><span class="s5">,</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">ArrowRightCircle</span><span class="s5">,</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">FileText</span></p>
+<p class="p4"><span class="s5">} </span><span class="s1">from</span><span class="s5"> </span><span class="s2">'lucide-react'</span><span class="s5">;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s1">const</span><span class="s2"> </span><span class="s3">App</span><span class="s2"> = () =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> [activeTab, setActiveTab] = useState(</span><span class="s4">'Overview'</span><span class="s2">);</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">// Total periods in the project is 7 (42 months / 6 months per period)</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> totalPeriods = </span><span class="s7">7</span><span class="s2">;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> projectData = {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">WP1</span><span class="s2">: {</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>title: </span><span class="s2">"Work Package 1: Engage &amp; Co-Develop"</span><span class="s5">,</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>objective: </span><span class="s2">"Define strategy and co-create guidelines for e-carsharing integration."</span><span class="s5">,</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>partners: [</span><span class="s2">"IPR"</span><span class="s5">, </span><span class="s2">"LIST"</span><span class="s5">, </span><span class="s2">"Autodelen"</span><span class="s5">, </span><span class="s2">"LHS"</span><span class="s5">],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>activities: [</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"Joint Methodology Definition"</span><span class="s5">, lead: </span><span class="s2">"LIST"</span><span class="s5">, desc: </span><span class="s2">"Establishing the transnational framework."</span><span class="s5">, start: </span><span class="s7">1</span><span class="s5">, end: </span><span class="s7">7</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"Stakeholder Mapping &amp; Co-creation"</span><span class="s5">, lead: </span><span class="s2">"IPR"</span><span class="s5">, desc: </span><span class="s2">"Identifying groups and co-designing services."</span><span class="s5">, start: </span><span class="s7">1</span><span class="s5">, end: </span><span class="s7">2</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"Digital Tools Assessment"</span><span class="s5">, lead: </span><span class="s2">"LIST"</span><span class="s5">, desc: </span><span class="s2">"GIS-based methods and data sharing agreements."</span><span class="s5">, start: </span><span class="s7">1</span><span class="s5">, end: </span><span class="s7">2</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"Policy Guidelines Development"</span><span class="s5">, lead: </span><span class="s2">"LHS"</span><span class="s5">, desc: </span><span class="s2">"Aligning with SUMPs and climate targets."</span><span class="s5">, start: </span><span class="s7">1</span><span class="s5">, end: </span><span class="s7">2</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"Communication Strategy"</span><span class="s5">, lead: </span><span class="s2">"POLIS"</span><span class="s5">, desc: </span><span class="s2">"Multi-channel outreach design."</span><span class="s5">, start: </span><span class="s7">1</span><span class="s5">, end: </span><span class="s7">7</span><span class="s5"> }</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>],</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>output: </span><span class="s2">"STEER-NWE Joint Strategy (O1.1)"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">WP2</span><span class="s2">: {</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>title: </span><span class="s2">"Work Package 2: Pilot &amp; Assess"</span><span class="s5">,</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>objective: </span><span class="s2">"Demonstrate integrated solutions through 6 real-life pilots."</span><span class="s5">,</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>partners: [</span><span class="s2">"Autodelen"</span><span class="s5">, </span><span class="s2">"LHS"</span><span class="s5">, </span><span class="s2">"AMS"</span><span class="s5">, </span><span class="s2">"FCC"</span><span class="s5">, </span><span class="s2">"DIFF"</span><span class="s5">, </span><span class="s2">"B-E"</span><span class="s5">, </span><span class="s2">"MGP"</span><span class="s5">],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>activities: [</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"Pre-piloting: KPIs &amp; Plans"</span><span class="s5">, lead: </span><span class="s2">"Autodelen"</span><span class="s5">, desc: </span><span class="s2">"Defining local action plans."</span><span class="s5">, start: </span><span class="s7">2</span><span class="s5">, end: </span><span class="s7">4</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"Public Space &amp; Housing Pilots"</span><span class="s5">, lead: </span><span class="s2">"LHS/AMS"</span><span class="s5">, desc: </span><span class="s2">"Pilots in Stuttgart and Amsterdam."</span><span class="s5">, start: </span><span class="s7">4</span><span class="s5">, end: </span><span class="s7">6</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"Charging &amp; Energy Hubs Pilots"</span><span class="s5">, lead: </span><span class="s2">"FCC/DIFF"</span><span class="s5">, desc: </span><span class="s2">"Pilots in Fingal and Differdange."</span><span class="s5">, start: </span><span class="s7">4</span><span class="s5">, end: </span><span class="s7">6</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"Governance &amp; Business Pilots"</span><span class="s5">, lead: </span><span class="s2">"B-E/MGP"</span><span class="s5">, desc: </span><span class="s2">"Pilots in Brussels and Greater Paris."</span><span class="s5">, start: </span><span class="s7">4</span><span class="s5">, end: </span><span class="s7">6</span><span class="s5"> },</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>{ name: </span><span class="s4">"Impact Assessment"</span><span class="s2">, lead: </span><span class="s4">"LIST"</span><span class="s2">, desc: </span><span class="s4">"LCA and GIS evaluation."</span><span class="s2">, start: </span><span class="s7">3</span><span class="s2">, end: </span><span class="s7">7</span><span class="s2"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"Upscaling &amp; Replication Plans"</span><span class="s5">, lead: </span><span class="s2">"Autodelen"</span><span class="s5">, desc: </span><span class="s2">"Defining future growth steps."</span><span class="s5">, start: </span><span class="s7">5</span><span class="s5">, end: </span><span class="s7">7</span><span class="s5"> }</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>],</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>output: </span><span class="s2">"STEER-NWE Toolkit (O2.4) + 6 Pilots"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>},</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">WP3</span><span class="s2">: {</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>title: </span><span class="s2">"Work Package 3: Train &amp; Replicate"</span><span class="s5">,</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>objective: </span><span class="s2">"Capacity building and long-term replication across North-West Europe."</span><span class="s5">,</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>partners: [</span><span class="s4">"POLIS"</span><span class="s2">, </span><span class="s4">"ESB"</span><span class="s2">, </span><span class="s4">"Autodelen"</span><span class="s2">],</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>activities: [</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"STEER-NWE Academy"</span><span class="s5">, lead: </span><span class="s2">"POLIS"</span><span class="s5">, desc: </span><span class="s2">"Training sessions for 120+ practitioners."</span><span class="s5">, start: </span><span class="s7">3</span><span class="s5">, end: </span><span class="s7">7</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"International Community of Practice"</span><span class="s5">, lead: </span><span class="s2">"IPR/POLIS"</span><span class="s5">, desc: </span><span class="s2">"Quality board and expert liaison."</span><span class="s5">, start: </span><span class="s7">3</span><span class="s5">, end: </span><span class="s7">7</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"Knowledge Sharing Observatory"</span><span class="s5">, lead: </span><span class="s2">"POLIS"</span><span class="s5">, desc: </span><span class="s2">"Transnational exchange platform."</span><span class="s5">, start: </span><span class="s7">3</span><span class="s5">, end: </span><span class="s7">7</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"Economic Viability Strategy"</span><span class="s5">, lead: </span><span class="s2">"ESB"</span><span class="s5">, desc: </span><span class="s2">"Funding pathways and sustainability."</span><span class="s5">, start: </span><span class="s7">5</span><span class="s5">, end: </span><span class="s7">7</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>{ name: </span><span class="s2">"Roadmap for NWE-wide Adoption"</span><span class="s5">, lead: </span><span class="s2">"Autodelen"</span><span class="s5">, desc: </span><span class="s2">"Legacy guide for external authorities."</span><span class="s5">, start: </span><span class="s7">5</span><span class="s5">, end: </span><span class="s7">7</span><span class="s5"> }</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>],</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>output: </span><span class="s2">"STEER-NWE Roadmap (O3.2)"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> partners = [</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">    </span>{ id: </span><span class="s2">"LIST"</span><span class="s5">, name: </span><span class="s2">"Luxembourg Institute of Science and Technology"</span><span class="s5">, role: </span><span class="s2">"Lead Partner / Tech"</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">    </span>{ id: </span><span class="s2">"B-E"</span><span class="s5">, name: </span><span class="s2">"Brussels Environment"</span><span class="s5">, role: </span><span class="s2">"Governance / Pilot"</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">    </span>{ id: </span><span class="s2">"LHS"</span><span class="s5">, name: </span><span class="s2">"City of Stuttgart"</span><span class="s5">, role: </span><span class="s2">"Housing Integration / Pilot"</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">    </span>{ id: </span><span class="s2">"AMS"</span><span class="s5">, name: </span><span class="s2">"City of Amsterdam"</span><span class="s5">, role: </span><span class="s2">"Public Space / Pilot"</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">    </span>{ id: </span><span class="s2">"FCC"</span><span class="s5">, name: </span><span class="s2">"Fingal County Council"</span><span class="s5">, role: </span><span class="s2">"Charging Hubs / Pilot"</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">    </span>{ id: </span><span class="s2">"ESB"</span><span class="s5">, name: </span><span class="s2">"Electricity Supply Board"</span><span class="s5">, role: </span><span class="s2">"Infrastructure Provider"</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">    </span>{ id: </span><span class="s2">"IPR"</span><span class="s5">, name: </span><span class="s2">"Paris Regional Planning Institute"</span><span class="s5">, role: </span><span class="s2">"Urban Policy"</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">    </span>{ id: </span><span class="s2">"POLIS"</span><span class="s5">, name: </span><span class="s2">"POLIS Network"</span><span class="s5">, role: </span><span class="s2">"Dissemination / Academy"</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">    </span>{ id: </span><span class="s2">"MGP"</span><span class="s5">, name: </span><span class="s2">"Greater Paris Metropolis"</span><span class="s5">, role: </span><span class="s2">"LEZ Governance / Pilot"</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">    </span>{ id: </span><span class="s2">"Autodelen"</span><span class="s5">, name: </span><span class="s2">"Autodelen.net"</span><span class="s5">, role: </span><span class="s2">"Shared Mobility Expert"</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">    </span>{ id: </span><span class="s2">"DIFF"</span><span class="s5">, name: </span><span class="s2">"City of Differdange"</span><span class="s5">, role: </span><span class="s2">"Solar Mobility / Pilot"</span><span class="s5"> },</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>];</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">// Component to render the duration stripe</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> </span><span class="s3">TimelineStripe</span><span class="s2"> = ({ start, end }) =&gt; {</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> width = ((end - start + </span><span class="s7">1</span><span class="s2">) / totalPeriods) * </span><span class="s7">100</span><span class="s2">;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">const</span><span class="s2"> left = ((start - </span><span class="s7">1</span><span class="s2">) / totalPeriods) * </span><span class="s7">100</span><span class="s2">;</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">    </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s2"> (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s4">"mt-3"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s2">"flex justify-between text-[8px] text-slate-400 mb-1 px-1 font-bold"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;span&gt;</span><span class="s3">P1</span><span class="s2">&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;span&gt;</span><span class="s3">P2</span><span class="s2">&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;span&gt;</span><span class="s3">P3</span><span class="s2">&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;span&gt;</span><span class="s3">P4</span><span class="s2">&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;span&gt;</span><span class="s3">P5</span><span class="s2">&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;span&gt;</span><span class="s3">P6</span><span class="s2">&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;span&gt;</span><span class="s3">P7</span><span class="s2">&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s2">"h-2 w-full bg-slate-100 rounded-full relative overflow-hidden"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;div<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">            </span>className=</span><span class="s2">"absolute h-full bg-blue-500 rounded-full transition-all duration-500"</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>style={{ width: </span><span class="s4">`</span><span class="s2">${width}</span><span class="s4">%`</span><span class="s2">, left: </span><span class="s4">`</span><span class="s2">${left}</span><span class="s4">%`</span><span class="s2"> }}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>/&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>};</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">const</span><span class="s2"> renderOverview = () =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;div className=</span><span class="s4">"space-y-6"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"grid grid-cols-1 md:grid-cols-2 gap-6"</span><span class="s5">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s2">"bg-blue-50 border border-blue-100 rounded-2xl p-6"</span><span class="s5">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">          </span>&lt;h3 className=</span><span class="s2">"text-blue-800 font-bold flex items-center gap-2 mb-3"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">Clock</span><span class="s2"> className=</span><span class="s4">"w-5 h-5"</span><span class="s2"> /&gt; </span><span class="s3">Where</span><span class="s2"> are we now?</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/h3&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">          </span>&lt;p className=</span><span class="s2">"text-blue-900/70 text-sm leading-relaxed"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span></span><span class="s3">Project</span><span class="s2"> </span><span class="s1">is</span><span class="s2"> currently </span><span class="s1">in</span><span class="s2"> the &lt;strong&gt;</span><span class="s3">Pilot</span><span class="s2"> &amp; </span><span class="s3">Assess</span><span class="s2">&lt;/strong&gt; phase. </span><span class="s3">WTG</span><span class="s2"> leads activities related to pilots, supporting cities </span><span class="s1">in</span><span class="s2"> planning and </span><span class="s3">KPIs</span><span class="s2"> definition. </span><span class="s3">During</span><span class="s2"> </span><span class="s1">this</span><span class="s2"> phase </span><span class="s3">POLIS</span><span class="s2"> will kick start the &lt;strong&gt;</span><span class="s3">STEER</span><span class="s2"> </span><span class="s3">Academy</span><span class="s2">&lt;/strong&gt; - a training program </span><span class="s1">for</span><span class="s2"> policymakers. </span><span class="s3">LIST</span><span class="s2"> will prepare an impact assessment framework and </span><span class="s3">IPR</span><span class="s2"> and </span><span class="s3">POLIS</span><span class="s2"> will conceptualize the </span><span class="s3">Community</span><span class="s2"> </span><span class="s1">of</span><span class="s2"> </span><span class="s3">Practice</span><span class="s2">, involving </span><span class="s7">50</span><span class="s2"> experts.</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s2">"bg-green-50 border border-green-100 rounded-2xl p-6"</span><span class="s5">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">          </span>&lt;h3 className=</span><span class="s2">"text-green-800 font-bold flex items-center gap-2 mb-3"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;</span><span class="s3">ArrowRightCircle</span><span class="s2"> className=</span><span class="s4">"w-5 h-5"</span><span class="s2"> /&gt; </span><span class="s3">What</span><span class="s2"> should happen </span><span class="s1">this</span><span class="s2"> period?</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/h3&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">          </span>&lt;ul className=</span><span class="s2">"text-green-900/70 text-sm space-y-2 list-disc pl-4"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;li&gt;</span><span class="s3">Finalization</span><span class="s2"> </span><span class="s1">of</span><span class="s2"> &lt;strong&gt;pilots concepts&lt;/strong&gt;&lt;/li&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;li&gt;</span><span class="s3">Finalization</span><span class="s2"> </span><span class="s1">of</span><span class="s2"> &lt;strong&gt;</span><span class="s3">KPIs</span><span class="s2">, data sources and measuring methods&lt;/strong&gt; across all </span><span class="s7">6</span><span class="s2"> pilot locations.&lt;/li&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;li&gt;</span><span class="s3">Launch</span><span class="s2"> </span><span class="s1">of</span><span class="s2"> the &lt;strong&gt;</span><span class="s3">STEER</span><span class="s2"> </span><span class="s3">Academy</span><span class="s2"> and </span><span class="s3">Community</span><span class="s2"> </span><span class="s1">of</span><span class="s2"> </span><span class="s3">Practice</span><span class="s2">&lt;/strong&gt;.&lt;/li&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;li&gt;</span><span class="s3">Setup</span><span class="s2"> </span><span class="s1">of</span><span class="s2"> the &lt;strong&gt;</span><span class="s3">Project</span><span class="s2"> </span><span class="s3">Observatory</span><span class="s2">&lt;/strong&gt; web tool.&lt;/li&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;li&gt;</span><span class="s3">Initial</span><span class="s2"> configuration </span><span class="s1">of</span><span class="s2"> </span><span class="s3">GIS</span><span class="s2">-based digital twin modules.&lt;/li&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/ul&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"bg-white border border-slate-100 rounded-2xl p-6 shadow-sm"</span><span class="s5">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>&lt;h3 className=</span><span class="s2">"text-slate-800 font-bold flex items-center gap-2 mb-4"</span><span class="s5">&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">          </span>&lt;</span><span class="s2">FileText</span><span class="s5"> className=</span><span class="s4">"w-5 h-5 text-blue-600"</span><span class="s5"> /&gt; </span><span class="s2">Upcoming</span><span class="s5"> </span><span class="s2">Activities</span><span class="s5"> &amp; </span><span class="s2">Deliverables</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s4">"space-y-3"</span><span class="s2">&gt;</span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">          </span>{</span><span class="s2">/* Formatted Deliverable Item */</span><span class="s5">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>{[</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">            </span>{ id: </span><span class="s2">"D.2.6.1"</span><span class="s5">, title: </span><span class="s2">"Impact Evaluation Framework"</span><span class="s5">, due: </span><span class="s2">"Period 3"</span><span class="s5">, lead: </span><span class="s2">"LIST"</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">            </span>{ id: </span><span class="s2">"D.3.1.1"</span><span class="s5">, title: </span><span class="s2">"Curriculum of training &amp; educational modules towards the STEER-NWE Academy"</span><span class="s5">, due: </span><span class="s2">"Period 3"</span><span class="s5">, lead: </span><span class="s2">"POLIS"</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">            </span>{ id: </span><span class="s2">"D.3.2.1"</span><span class="s5">, title: </span><span class="s2">"MoU of the STEER-NWE Community of Practice"</span><span class="s5">, due: </span><span class="s2">"Period 3"</span><span class="s5">, lead: </span><span class="s2">"IPR &amp; POLIS"</span><span class="s5"> },</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">            </span>{ id: </span><span class="s2">"D.3.3.1"</span><span class="s5">, title: </span><span class="s2">"Set up of the project observatory and knowledge sharing platform"</span><span class="s5">, due: </span><span class="s2">"Period 3"</span><span class="s5">, lead: </span><span class="s2">"POLIS"</span><span class="s5"> },</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>].map((item, idx) =&gt; (</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">            </span>&lt;div key={idx} className=</span><span class="s2">"grid grid-cols-1 sm:grid-cols-12 gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100 items-start"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s4">"sm:col-span-8"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                </span>&lt;p className=</span><span class="s2">"text-slate-700 font-medium italic text-sm leading-snug"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;span className=</span><span class="s4">"font-bold not-italic mr-1"</span><span class="s2">&gt;{item.id}&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>{item.title}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s2">"sm:col-span-4 flex flex-wrap gap-2 sm:justify-end"</span><span class="s5">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                </span>&lt;span className=</span><span class="s2">"text-blue-600 font-bold text-[10px] bg-white px-2 py-1 rounded shadow-sm border border-blue-50 whitespace-nowrap"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span></span><span class="s3">Due</span><span class="s2">: {item.due}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/span&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                </span>&lt;span className=</span><span class="s2">"text-blue-600 font-bold text-[10px] bg-white px-2 py-1 rounded shadow-sm border border-blue-50 whitespace-nowrap"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span></span><span class="s3">Lead</span><span class="s2">: {item.lead}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>))}</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">          </span></span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"grid grid-cols-1 sm:grid-cols-12 gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100 items-center"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s4">"sm:col-span-8"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">              </span>&lt;p className=</span><span class="s2">"text-slate-700 font-medium italic text-sm"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;span className=</span><span class="s4">"font-bold not-italic mr-1"</span><span class="s2">&gt;</span><span class="s3">Pilots</span><span class="s2">&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"sm:col-span-4 flex sm:justify-end"</span><span class="s5">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">              </span>&lt;span className=</span><span class="s2">"text-slate-400 font-bold text-[10px] uppercase tracking-wider"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span></span><span class="s3">Starts</span><span class="s2"> </span><span class="s3">Period</span><span class="s2"> </span><span class="s7">4</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>&lt;div className=</span><span class="s2">"bg-slate-900 text-white rounded-2xl p-6 shadow-xl relative overflow-hidden"</span><span class="s5">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s2">"absolute top-0 right-0 p-4 opacity-10"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;</span><span class="s3">Calendar</span><span class="s2"> className=</span><span class="s4">"w-24 h-24"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>&lt;h3 className=</span><span class="s2">"text-yellow-400 font-bold flex items-center gap-2 mb-4 uppercase tracking-widest text-sm"</span><span class="s5">&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">          </span></span><span class="s2">Upcoming</span><span class="s5"> </span><span class="s2">Events</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s4">"space-y-4"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s4">"flex gap-4 items-start"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"bg-white/10 p-2 rounded text-center min-w-[70px]"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;span className=</span><span class="s4">"block text-xs uppercase font-bold"</span><span class="s2">&gt;</span><span class="s3">April</span><span class="s2">&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;span className=</span><span class="s4">"block text-xl font-bold"</span><span class="s2">&gt;</span><span class="s7">15</span><span class="s2">-</span><span class="s7">16</span><span class="s2">&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;p className=</span><span class="s4">"font-bold"</span><span class="s2">&gt;</span><span class="s3">Knowledge</span><span class="s2"> </span><span class="s3">Partner</span><span class="s2"> </span><span class="s3">Meeting</span><span class="s2">&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;p className=</span><span class="s4">"text-xs text-slate-400 mt-1"</span><span class="s2">&gt;</span><span class="s3">Hosted</span><span class="s2"> by &lt;strong&gt;</span><span class="s3">POLIS</span><span class="s2">&lt;/strong&gt; </span><span class="s1">in</span><span class="s2"> </span><span class="s3">Brussels</span><span class="s2">. </span><span class="s3">Focusing</span><span class="s2"> on pilots and </span><span class="s3">WP3</span><span class="s2"> strategy and training curriculum.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s4">"flex gap-4 items-start"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"bg-white/10 p-2 rounded text-center min-w-[70px]"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;span className=</span><span class="s4">"block text-xs uppercase font-bold"</span><span class="s2">&gt;</span><span class="s3">May</span><span class="s2">&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;span className=</span><span class="s4">"block text-xl font-bold"</span><span class="s2">&gt;</span><span class="s7">19</span><span class="s2">-</span><span class="s7">22</span><span class="s2">&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;p className=</span><span class="s4">"font-bold"</span><span class="s2">&gt;</span><span class="s3">Partner</span><span class="s2"> </span><span class="s3">Meeting</span><span class="s2">&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;p className=</span><span class="s4">"text-xs text-slate-400 mt-1"</span><span class="s2">&gt;</span><span class="s3">Hosted</span><span class="s2"> by &lt;strong&gt;</span><span class="s3">MGP</span><span class="s2">&lt;/strong&gt; and &lt;strong&gt;</span><span class="s3">IPR</span><span class="s2">&lt;/strong&gt; </span><span class="s1">in</span><span class="s2"> </span><span class="s3">Paris</span><span class="s2">. </span><span class="s3">Field</span><span class="s2"> visits to potential suburban pilot sites.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p2"><span class="s5"><span class="Apple-converted-space">  </span></span><span class="s2">return</span><span class="s5"> (</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">    </span>&lt;div className=</span><span class="s2">"min-h-screen bg-slate-50 p-4 md:p-8 font-sans"</span><span class="s5">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>&lt;header className=</span><span class="s2">"max-w-6xl mx-auto mb-10 text-center"</span><span class="s5">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>&lt;h1 className=</span><span class="s2">"text-3xl font-bold text-slate-800 mb-2"</span><span class="s5">&gt;</span><span class="s3">STEER</span><span class="s5">-</span><span class="s3">NWE</span><span class="s5"> </span><span class="s3">Project</span><span class="s5"> </span><span class="s3">Timeline</span><span class="s5">&lt;/h1&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>&lt;p className=</span><span class="s2">"text-slate-600 max-w-2xl mx-auto italic"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span></span><span class="s3">Visualization</span><span class="s2"> </span><span class="s1">of</span><span class="s2"> </span><span class="s7">42</span><span class="s2"> months (</span><span class="s7">7</span><span class="s2"> periods) </span><span class="s1">of</span><span class="s2"> activity planning.</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/header&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>&lt;main className=</span><span class="s2">"max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8"</span><span class="s5">&gt;</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">        </span></span></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span>{</span><span class="s2">/* Left Section: Navigation &amp; Content */</span><span class="s5">}</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s2">"lg:col-span-2 space-y-6"</span><span class="s5">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"flex bg-white rounded-xl shadow-sm p-1 border border-slate-200 overflow-x-auto whitespace-nowrap"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;button</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>onClick={() =&gt; setActiveTab(</span><span class="s4">'Overview'</span><span class="s2">)}</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">              </span>className={</span><span class="s2">`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 </span><span class="s5">${</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>activeTab === </span><span class="s4">'Overview'</span><span class="s2"><span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                </span>? </span><span class="s2">'bg-slate-800 text-white shadow-md'</span><span class="s5"><span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                </span>: </span><span class="s2">'text-slate-500 hover:text-slate-700 hover:bg-slate-50'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>}</span><span class="s4">`</span><span class="s2">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">LayoutDashboard</span><span class="s2"> className=</span><span class="s4">"w-4 h-4"</span><span class="s2"> /&gt; </span><span class="s3">General</span><span class="s2"> </span><span class="s3">Overview</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>{</span><span class="s3">Object</span><span class="s2">.keys(projectData).map((wp) =&gt; (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;button</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>key={wp}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>onClick={() =&gt; setActiveTab(wp)}</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                </span>className={</span><span class="s2">`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all </span><span class="s5">${</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>activeTab === wp<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                  </span>? </span><span class="s2">'bg-blue-600 text-white shadow-md'</span><span class="s5"><span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                  </span>: </span><span class="s2">'text-slate-500 hover:text-slate-700 hover:bg-slate-50'</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>}</span><span class="s4">`</span><span class="s2">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>{wp}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>))}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"bg-white rounded-2xl shadow-md border border-slate-100 p-6 min-h-[450px]"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>{activeTab === </span><span class="s4">'Overview'</span><span class="s2"> ? renderOverview() : (</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s2">"flex items-start justify-between mb-6"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;h2 className=</span><span class="s4">"text-xl font-bold text-slate-800"</span><span class="s2">&gt;{projectData[activeTab].title}&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;p className=</span><span class="s4">"text-slate-500 text-sm mt-1"</span><span class="s2">&gt;{projectData[activeTab].objective}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                  </span>&lt;div className=</span><span class="s2">"bg-blue-50 p-3 rounded-full shrink-0"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>{activeTab === </span><span class="s4">'WP1'</span><span class="s2"> &amp;&amp; &lt;</span><span class="s3">Settings</span><span class="s2"> className=</span><span class="s4">"text-blue-600 w-6 h-6"</span><span class="s2"> /&gt;}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>{activeTab === </span><span class="s4">'WP2'</span><span class="s2"> &amp;&amp; &lt;</span><span class="s3">MapPin</span><span class="s2"> className=</span><span class="s4">"text-blue-600 w-6 h-6"</span><span class="s2"> /&gt;}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>{activeTab === </span><span class="s4">'WP3'</span><span class="s2"> &amp;&amp; &lt;</span><span class="s3">BookOpen</span><span class="s2"> className=</span><span class="s4">"text-blue-600 w-6 h-6"</span><span class="s2"> /&gt;}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s4">"space-y-5 mb-8"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                  </span>&lt;h3 className=</span><span class="s2">"text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;</span><span class="s3">Clock</span><span class="s2"> className=</span><span class="s4">"w-3 h-3"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span></span><span class="s3">Activities</span><span class="s2"> &amp; </span><span class="s3">Schedule</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;div className=</span><span class="s4">"grid gap-4"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>{projectData[activeTab].activities.map((act, i) =&gt; (</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                      </span>&lt;div key={i} className=</span><span class="s2">"p-4 rounded-xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-md hover:border-blue-200 transition-all group"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;div className=</span><span class="s4">"flex items-start gap-4"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                          </span>&lt;div className=</span><span class="s2">"bg-white w-8 h-8 rounded flex items-center justify-center shadow-sm text-blue-600 font-bold border border-slate-100 text-sm shrink-0"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                            </span>{i + </span><span class="s7">1</span><span class="s2">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                          </span>&lt;div className=</span><span class="s4">"flex-1 min-w-0"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                            </span>&lt;div className=</span><span class="s4">"flex justify-between items-start"</span><span class="s2">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                              </span>&lt;h4 className=</span><span class="s4">"font-semibold text-slate-700 truncate pr-2"</span><span class="s2">&gt;{act.name}&lt;/h4&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                              </span>&lt;span className=</span><span class="s2">"text-[9px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-bold uppercase whitespace-nowrap"</span><span class="s5">&gt;</span><span class="s3">Lead</span><span class="s5">: {act.lead}&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                            </span>&lt;p className=</span><span class="s4">"text-xs text-slate-500 mt-0.5 leading-relaxed"</span><span class="s2">&gt;{act.desc}&lt;/p&gt;</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">                            </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                            </span>{</span><span class="s8">/* The Timeline Stripe */</span><span class="s2">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                            </span>&lt;</span><span class="s3">TimelineStripe</span><span class="s2"> start={act.start} end={act.end} /&gt;</span></p>
+<p class="p5"><span class="s2"><span class="Apple-converted-space">                            </span></span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                          </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                          </span>&lt;</span><span class="s3">ChevronRight</span><span class="s5"> className=</span><span class="s2">"text-slate-300 w-4 h-4 mt-1 group-hover:translate-x-1 transition-transform"</span><span class="s5"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>))}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s2">"bg-blue-600 rounded-xl p-4 text-white flex items-center justify-between"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;span className=</span><span class="s4">"text-[10px] uppercase font-bold opacity-80"</span><span class="s2">&gt;</span><span class="s3">Final</span><span class="s2"> </span><span class="s3">WP</span><span class="s2"> </span><span class="s3">Output</span><span class="s2">&lt;/span&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                    </span>&lt;p className=</span><span class="s4">"font-bold text-lg"</span><span class="s2">&gt;{projectData[activeTab].output}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;</span><span class="s3">TrendingUp</span><span class="s2"> className=</span><span class="s4">"opacity-40 w-8 h-8"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>)}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p6"><span class="s5"><span class="Apple-converted-space">        </span>{</span><span class="s2">/* Right Section: Partners &amp; Stats */</span><span class="s5">}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;div className=</span><span class="s4">"space-y-6"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"bg-white rounded-2xl shadow-md border border-slate-100 p-6"</span><span class="s5">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">            </span>&lt;h3 className=</span><span class="s2">"font-bold text-slate-800 mb-4 flex items-center gap-2"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">Users</span><span class="s2"> className=</span><span class="s4">"w-5 h-5 text-blue-600"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span></span><span class="s3">Consortium</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/h3&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s2">"space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>{partners.map((p) =&gt; (</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                </span>&lt;div key={p.id} className=</span><span class="s2">"p-3 rounded-lg border border-slate-50 bg-slate-50 hover:bg-white hover:border-slate-200 hover:shadow-sm transition-all"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;span className=</span><span class="s4">"font-bold text-blue-600 text-[10px]"</span><span class="s2">&gt;{p.id}&lt;/span&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s2">"text-xs font-semibold text-slate-700 mt-0.5 leading-tight"</span><span class="s5">&gt;{p.name}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s4">"text-[9px] text-slate-400 italic"</span><span class="s2">&gt;{p.role}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>))}</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">          </span>&lt;div className=</span><span class="s2">"bg-slate-800 rounded-2xl shadow-md p-6 text-white"</span><span class="s5">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">            </span>&lt;h3 className=</span><span class="s2">"font-bold mb-4 flex items-center gap-2"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;</span><span class="s3">Zap</span><span class="s2"> className=</span><span class="s4">"w-5 h-5 text-yellow-400"</span><span class="s2"> /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span></span><span class="s3">Key</span><span class="s2"> </span><span class="s3">Indicators</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;div className=</span><span class="s4">"space-y-4"</span><span class="s2">&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s2">"flex items-center gap-3 bg-white/10 p-3 rounded-xl"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s4">"p-2 bg-blue-500 rounded-lg"</span><span class="s2">&gt;&lt;</span><span class="s3">TrendingUp</span><span class="s2"> className=</span><span class="s4">"w-4 h-4"</span><span class="s2"> /&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s4">"text-sm font-bold"</span><span class="s2">&gt;</span><span class="s7">1</span><span class="s2">,</span><span class="s7">000</span><span class="s2">+ </span><span class="s3">Tonnes</span><span class="s2">&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s4">"text-[9px] uppercase opacity-60"</span><span class="s2">&gt;$CO_2$ </span><span class="s3">Savings</span><span class="s2"> </span><span class="s3">Target</span><span class="s2">&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s2">"flex items-center gap-3 bg-white/10 p-3 rounded-xl"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s4">"p-2 bg-yellow-500 rounded-lg"</span><span class="s2">&gt;&lt;</span><span class="s3">Users</span><span class="s2"> className=</span><span class="s4">"w-4 h-4"</span><span class="s2"> /&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s4">"text-sm font-bold"</span><span class="s2">&gt;</span><span class="s7">120</span><span class="s2"> </span><span class="s3">Participants</span><span class="s2">&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s4">"text-[9px] uppercase opacity-60"</span><span class="s2">&gt;</span><span class="s3">Academy</span><span class="s2"> </span><span class="s3">Training</span><span class="s2"> </span><span class="s3">Goal</span><span class="s2">&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">              </span>&lt;div className=</span><span class="s2">"flex items-center gap-3 bg-white/10 p-3 rounded-xl"</span><span class="s5">&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div className=</span><span class="s4">"p-2 bg-green-500 rounded-lg"</span><span class="s2">&gt;&lt;</span><span class="s3">MapPin</span><span class="s2"> className=</span><span class="s4">"w-4 h-4"</span><span class="s2"> /&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s4">"text-sm font-bold"</span><span class="s2">&gt;</span><span class="s7">6</span><span class="s2"> </span><span class="s3">NWE</span><span class="s2"> </span><span class="s3">Cities</span><span class="s2">&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                  </span>&lt;p className=</span><span class="s4">"text-[9px] uppercase opacity-60"</span><span class="s2">&gt;</span><span class="s3">Integrated</span><span class="s2"> </span><span class="s3">Urban</span><span class="s2"> </span><span class="s3">Pilots</span><span class="s2">&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">              </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/main&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p4"><span class="s5"><span class="Apple-converted-space">      </span>&lt;footer className=</span><span class="s2">"max-w-6xl mx-auto mt-12 py-6 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center text-slate-400 text-[10px]"</span><span class="s5">&gt;</span></p>
+<p class="p3"><span class="s5"><span class="Apple-converted-space">        </span>&lt;p&gt;</span><span class="s2">Interreg</span><span class="s5"> </span><span class="s2">North</span><span class="s5">-</span><span class="s2">West</span><span class="s5"> </span><span class="s2">Europe</span><span class="s5"> </span><span class="s7">2021</span><span class="s5">-</span><span class="s7">2027</span><span class="s5"> | </span><span class="s2">NWE0400629</span><span class="s5">-</span><span class="s2">STEER</span><span class="s5">-</span><span class="s2">NWE</span><span class="s5">&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">        </span>&lt;p className=</span><span class="s4">"mt-2 md:mt-0"</span><span class="s2">&gt;</span><span class="s7">1</span><span class="s2"> </span><span class="s3">Period</span><span class="s2"> = </span><span class="s7">6</span><span class="s2"> </span><span class="s3">Months</span><span class="s2"> | </span><span class="s3">Total</span><span class="s2"> </span><span class="s3">Project</span><span class="s2"> </span><span class="s3">Duration</span><span class="s2"> = </span><span class="s7">42</span><span class="s2"> </span><span class="s3">Months</span><span class="s2">&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;/footer&gt;</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">      </span>&lt;style dangerouslySetInnerHTML={{ __html: </span><span class="s4">`</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">        </span>.custom-scrollbar::-webkit-scrollbar { width: 4px; }</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">        </span>.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">        </span>.custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }</span></p>
+<p class="p4"><span class="s2"><span class="Apple-converted-space">      </span>`</span><span class="s5">}} /&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p1"><span class="s2">};</span></p>
+<p class="p5"><span class="s6"></span><br></p>
+<p class="p2"><span class="s2">export</span><span class="s5"> </span><span class="s2">default</span><span class="s5"> </span><span class="s3">App</span><span class="s5">;</span></p>
+</body>
+</html>
